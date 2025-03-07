@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "958350959019",
+    "project_id": "flutter-firebase-9400f",
+    "storage_bucket": "flutter-firebase-9400f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958350959019:android:96fb3aaa412629d99a72ee",
+        "android_client_info": {
+          "package_name": "com.example.notes_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBPvzVkSzSoz49xxFAoBdjcZi09NHCF88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
