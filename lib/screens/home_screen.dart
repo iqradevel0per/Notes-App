@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_app/controllers/add_notes_controller.dart';
 import 'package:notes_app/screens/addnotes_screen.dart';
-import 'package:notes_app/screens/eiditor_screen.dart';
+
 import 'package:notes_app/screens/login_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -40,130 +40,107 @@ class HomeScreen extends StatelessWidget {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 20),
-            child: Row(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey.shade500,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.to(() => EiditorScreen());
-                      },
-                      child: Icon(
-                        Icons.search_outlined,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 5),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey.shade500,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        /// dialogue box
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            backgroundColor: Colors.black,
-                            actions: [
-                              Column(
+            padding: const EdgeInsets.only(right: 25),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.grey.shade500,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    /// dialogue box
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        backgroundColor: Colors.black,
+                        actions: [
+                          Column(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 15),
+                                child: Icon(
+                                  Icons.info_outline,
+                                  color: Colors.white,
+                                  size: 36,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 20),
+                                child: Text(
+                                  "Want to Logout ?",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.white),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 15),
-                                    child: Icon(
-                                      Icons.info_outline,
-                                      color: Colors.white,
-                                      size: 36,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 20),
-                                    child: Text(
-                                      "Want to Logout ?",
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w700,
-                                          color: Colors.white),
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      TextButton(
-                                        style: TextButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5)),
-                                            backgroundColor: Colors.red),
-                                        onPressed: () async {
-                                          await FirebaseAuth.instance
-                                              .signOut()
-                                              .then((_) {
-                                            Get.to(() => LoginScreen());
-                                          });
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10),
-                                          child: Text(
-                                            "YES",
-                                            style: TextStyle(
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.white),
-                                          ),
-                                        ),
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(5)),
+                                        backgroundColor: Colors.red),
+                                    onPressed: () async {
+                                      await FirebaseAuth.instance
+                                          .signOut()
+                                          .then((_) {
+                                        Get.to(() => LoginScreen());
+                                      });
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      child: Text(
+                                        "YES",
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w700,
+                                            color: Colors.white),
                                       ),
-                                      SizedBox(width: 10),
-                                      TextButton(
-                                        style: TextButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5)),
-                                            backgroundColor: Colors.green),
-                                        onPressed: () {
-                                          Get.back();
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20),
-                                          child: Text(
-                                            "No",
-                                            style: TextStyle(
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.white),
-                                          ),
-                                        ),
-                                      )
-                                    ],
+                                    ),
+                                  ),
+                                  SizedBox(width: 10),
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(5)),
+                                        backgroundColor: Colors.green),
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20),
+                                      child: Text(
+                                        "No",
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w700,
+                                            color: Colors.white),
+                                      ),
+                                    ),
                                   )
                                 ],
-                              ),
+                              )
                             ],
                           ),
-                        );
-                      },
-                      child: Icon(
-                        Icons.logout_outlined,
-                        color: Colors.white,
+                        ],
                       ),
-                    ),
+                    );
+                  },
+                  child: Icon(
+                    Icons.logout_outlined,
+                    color: Colors.white,
                   ),
                 ),
-              ],
+              ),
             ),
           ),
         ],

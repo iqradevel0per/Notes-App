@@ -17,6 +17,11 @@ class LoginScreen extends StatelessWidget {
   var controller = Get.put(
     AuthController(),
   );
+  bool isValidEmail(String email) {
+    final emailRegex = RegExp(
+        (r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"));
+    return emailRegex.hasMatch(email);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,8 +67,8 @@ class LoginScreen extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                       color: Colors.grey.shade700),
                   suffixIcon: Icon(
-                    Icons.add_alert_outlined,
-                    color: const Color.fromARGB(255, 255, 89, 0),
+                    Icons.email,
+                    color: Colors.black,
                   ),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(13),
@@ -72,6 +77,15 @@ class LoginScreen extends StatelessWidget {
                         width: .5,
                       )),
                   cursorColor: Colors.grey.shade700,
+                  validator: (newValue) {
+                    if (newValue == null || newValue.isEmpty) {
+                      return "Please enter your Email";
+                    } else if (isValidEmail(newValue)) {
+                      return "Please enter your valid emai Address";
+                    } else {
+                      return "null";
+                    }
+                  },
                 ),
               ),
               SizedBox(height: 10),
@@ -130,23 +144,27 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.only(left: 260, right: 20),
+              Align(
+                alignment: Alignment.centerRight,
                 child: GestureDetector(
                   onTap: () {
                     Get.to(() => ForgotPassword());
                   },
-                  child: Text(
-                    "Forgot Password?",
-                    style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black),
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: Text(
+                      "Forgot Password?",
+                      style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black),
+                    ),
                   ),
                 ),
               ),
               SizedBox(height: 50),
-              Center(
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: ElevatedButton(
                     onPressed: () async {
                       await controller.SingInMethod(
@@ -154,49 +172,46 @@ class LoginScreen extends StatelessWidget {
                           password: controller.passwordController.text);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 255, 72, 0),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 140, vertical: 15),
-                      child: Obx(
-                        () => controller.isLoading.value
-                            ? CircularProgressIndicator(
-                                color: Colors.white,
-                              )
-                            : Text(
-                                "Log In",
-                                style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.w800,
-                                    color: Colors.white),
-                              ),
-                      ),
+                        backgroundColor: Color.fromARGB(255, 255, 72, 0),
+                        fixedSize: Size(double.maxFinite, 55)),
+                    child: Obx(
+                      () => controller.isLoading.value
+                          ? CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : Text(
+                              "Log In",
+                              style: TextStyle(
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.white),
+                            ),
                     )),
               ),
               SizedBox(height: 30),
               Center(
                 child: RichText(
                   text: TextSpan(
-                      text: "Don’t have an account?",
-                      style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black,
-                      ),
-                      children: [
-                        TextSpan(
-                            text: " Sign Up",
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w600,
-                              color: Color.fromARGB(255, 255, 72, 0),
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Get.to(() => SingUp());
-                              }),
-                      ],),
+                    text: "Don’t have an account?",
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
+                    children: [
+                      TextSpan(
+                          text: " Sign Up",
+                          style: TextStyle(
+                            fontSize: 19,
+                            fontWeight: FontWeight.w700,
+                            color: Color.fromARGB(255, 255, 72, 0),
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Get.to(() => SingUp());
+                            }),
+                    ],
+                  ),
                 ),
               ),
             ],

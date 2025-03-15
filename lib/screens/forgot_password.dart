@@ -21,14 +21,19 @@ class ForgotPassword extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 50),
+              padding: const EdgeInsets.only(
+                top: 50,
+              ),
               child: IconButton(
                   onPressed: () {
                     Get.back();
                   },
-                  icon: Icon(Icons.arrow_back)),
+                  icon: Icon(
+                    Icons.arrow_back,
+                    size: 25,
+                  )),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Text(
@@ -50,7 +55,7 @@ class ForgotPassword extends StatelessWidget {
                     color: Colors.black),
               ),
             ),
-            SizedBox(height: 5),
+            SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: CustomTextfield(
@@ -63,8 +68,8 @@ class ForgotPassword extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     color: Colors.grey.shade700),
                 suffixIcon: Icon(
-                  Icons.add_alert_outlined,
-                  color: const Color.fromARGB(255, 255, 89, 0),
+                  Icons.track_changes_sharp,
+                  color: Colors.black,
                 ),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(13),
@@ -76,30 +81,27 @@ class ForgotPassword extends StatelessWidget {
               ),
             ),
             SizedBox(height: 100),
-            Center(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
               child: ElevatedButton(
                   onPressed: () async {
                     await controller.forgotPassword();
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 255, 72, 0),
-                  ),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 70, vertical: 13),
-                    child: Obx(
-                      () => controller.isLoading.value
-                          ? CircularProgressIndicator(
-                              color: Colors.white,
-                            )
-                          : Text(
-                              "Send Email",
-                              style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w800,
-                                  color: Colors.white),
-                            ),
-                    ),
+                      backgroundColor: Color.fromARGB(255, 255, 72, 0),
+                      fixedSize: Size(double.maxFinite, 55)),
+                  child: Obx(
+                    () => controller.isLoading.value
+                        ? CircularProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : Text(
+                            "Send Email",
+                            style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.white),
+                          ),
                   )),
             ),
           ],

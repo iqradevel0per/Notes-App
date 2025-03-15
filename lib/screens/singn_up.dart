@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_app/controllers/singn_in.dart';
 import 'package:notes_app/custom/custom_textfield.dart';
-import 'package:notes_app/screens/home_screen.dart';
+import 'package:notes_app/screens/login_screen.dart';
 
 // ignore: must_be_immutable
 class SingUp extends StatelessWidget {
@@ -15,6 +15,11 @@ class SingUp extends StatelessWidget {
   var controller = Get.put(
     AuthController(),
   );
+  bool isValidEmail(String email) {
+    final emailRegex = RegExp(
+        (r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"));
+    return emailRegex.hasMatch(email);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,6 +112,15 @@ class SingUp extends StatelessWidget {
                         width: .5,
                       )),
                   cursorColor: Colors.grey.shade700,
+                  validator: (newValue) {
+                    if (newValue == null || newValue.isEmpty) {
+                      return "Please enter your Email";
+                    } else if (isValidEmail(newValue)) {
+                      return "Please enter your valid emai Address";
+                    } else {
+                      return "null";
+                    }
+                  },
                 ),
               ),
               SizedBox(height: 20),
@@ -221,30 +235,28 @@ class SingUp extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 50),
-              Center(
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: ElevatedButton(
                   onPressed: () async {
                     await controller.SingupMethod();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 255, 72, 0),
+                    fixedSize: Size(double.maxFinite, 55),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 120, vertical: 15),
-                    child: Obx(
-                      () => controller.isLoading.value
-                          ? CircularProgressIndicator(
-                              color: Colors.white,
-                            )
-                          : Text(
-                              "Sign Up",
-                              style: TextStyle(
-                                  fontSize: 19,
-                                  fontWeight: FontWeight.w800,
-                                  color: Colors.white),
-                            ),
-                    ),
+                  child: Obx(
+                    () => controller.isLoading.value
+                        ? CircularProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : Text(
+                            "Sign Up",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.white),
+                          ),
                   ),
                 ),
               ),
@@ -260,15 +272,15 @@ class SingUp extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                            text: " LogIn ",
+                            text: " Log In ",
                             style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w600,
+                              fontSize: 19,
+                              fontWeight: FontWeight.w700,
                               color: Color.fromARGB(255, 255, 72, 0),
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Get.to(() => HomeScreen());
+                                Get.to(() => LoginScreen());
                               }),
                       ]),
                 ),

@@ -47,32 +47,14 @@ class AddnotesScreen extends StatelessWidget {
                   Get.back();
                 },
                 child: Icon(
-                  Icons.arrow_back_ios_new_sharp,
-                  size: 20,
+                  Icons.arrow_back,
+                  size: 23,
                   color: Colors.white,
                 ),
               ),
             ),
           ),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.grey.shade500,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.info_outline,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -167,7 +149,8 @@ class AddnotesScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 50),
-                Center(
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: ElevatedButton(
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
@@ -186,24 +169,20 @@ class AddnotesScreen extends StatelessWidget {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 255, 72, 0),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 120, vertical: 15),
-                      child: Obx(
-                        () => addNoteController.isLoading.value
-                            ? CircularProgressIndicator(
-                                color: Colors.white,
-                              )
-                            : Text(
-                                title.isEmpty ? "Save Notes" : "update Notes",
-                                style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w800,
-                                    color: Colors.white),
-                              ),
-                      ),
+                        backgroundColor: Color.fromARGB(255, 255, 72, 0),
+                        fixedSize: Size(double.maxFinite, 55)),
+                    child: Obx(
+                      () => addNoteController.isLoading.value
+                          ? CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : Text(
+                              title.isEmpty ? "Save Notes" : "update Notes",
+                              style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.white),
+                            ),
                     ),
                   ),
                 ),
